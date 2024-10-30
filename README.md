@@ -1,60 +1,117 @@
 # Admin Tool Author Service (ASAT)
 
-## Overview
+**Admin Tool Author Service (ASAT)** é uma aplicação GUI (Interface Gráfica de Usuário) criada com **PySimpleGUI** para gerenciar informações de Journals, Articles e Authors. O aplicativo permite ao usuário pesquisar e gerenciar informações desses itens, além de configurar APIs e chaves de acesso.
 
-This application is a graphical user interface (GUI) developed using Python and PySimpleGUI. It includes a main screen with options to manage "Journal," "Article," and "Author" entities, as well as configuration and profile settings.
+## Estrutura do Projeto
 
-### Key Features
+A aplicação foi dividida em módulos para melhorar a organização e manutenção do código:
 
-1. **Main Screen**: The main screen has buttons for managing journals, articles, and authors, along with a menu for "Settings" and "Profile."
-2. **Settings**: Provides access to "APIs" and "Keys" settings, each of which opens a dedicated screen.
-3. **Profile**: Allows users to edit their profile (username and email) and to close the application with confirmation.
-4. **Journal, Article, and Author Management**: Each button on the main screen opens a specific screen for managing Journals, Articles, or Authors.
-5. **Logging**: All actions, including screen navigation and button clicks, are logged with date and time in a `log.txt` file.
+```
+LocalAS/
+├── main.py          # Arquivo principal com o loop de eventos
+├── windows.py       # Contém funções de criação de telas
+├── utils.py         # Funções auxiliares, como logging
+└── logs/            # Pasta de logs
+```
 
-### Screens and Components
+## Funcionalidades
 
-1. **Main Screen**: Contains buttons for "Journal," "Article," and "Author" management, and a menu with "Settings" and "Profile" options.
-2. **Settings Screen**: Opens upon selecting "APIs" or "Keys" from the "Settings" menu, showing a dedicated screen for each option.
-3. **Profile Screen**: Opens upon selecting "Edit Profile," displaying fields for editing the username and email.
-4. **Confirmation Screen**: Prompts the user to confirm closing the application when "Close" is selected from the "Profile" menu.
-5. **Journal, Article, and Author Screens**: Each button (Journal, Article, Author) opens a specific screen with management options and a "Back Home" button.
+1. **Tela Principal (Home)**:
+   - Contém botões para **Journal**, **Article** e **Author**.
+   - Menu suspenso com opções:
+     - **Settings** (Configurações):
+       - **APIs** e **Keys**: Abre uma tela de configurações específicas.
+     - **Profile** (Perfil):
+       - **Edit Profile**: Abre uma tela para edição de nome de usuário e e-mail.
+       - **Close**: Solicita confirmação antes de fechar a aplicação.
 
-### Usage of "Back Home" Button
+2. **Journals, Articles e Authors**:
+   - Cada botão abre uma tela de gerenciamento específica.
+   - Função **Search** em cada tela:
+     - Para **Authors**, a pesquisa pode ser feita por **First Name**, **Last Name**, **Email** ou **User ID**.
 
-Each management or settings screen includes a "Back Home" button that closes the current screen and returns to the main screen. This button also resets the window state, allowing users to reopen the same screen multiple times without issues.
+3. **Logs de Ação**:
+   - Todas as ações do usuário são registradas em `logs/log.txt`, incluindo data, hora e detalhes da ação tomada.
 
-### Log File
+4. **Fechar Aplicação**:
+   - A opção **Close** no menu **Profile** solicita confirmação antes de encerrar a aplicação.
 
-The application maintains a `log.txt` file that records each user action, including the time, screen navigated, or action taken.
+## Pré-requisitos
 
-## Requirements
+- **Python 3.7+**
+- **PySimpleGUI**: instale com `pip install PySimpleGUI`
 
-- Python 3.x
-- PySimpleGUI
+## Instalação
 
-Install dependencies with:
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/seu_usuario/seu_repositorio.git
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd LocalAS
+   ```
+3. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-> pip install PySimpleGUI
+## Uso
 
-## How to Use
-1. Run the program.
-2. Use the main buttons or menu options to navigate between different screens.
-3. Click "Back Home" to return to the main screen and allow for reopening any management or settings screen.
-4. Choose "Close" from the Profile menu to exit the application, with a confirmation prompt.
+1. Execute o programa:
+   ```bash
+   python main.py
+   ```
+2. Navegue pelo menu para acessar as diferentes funcionalidades.
+3. Todas as ações do usuário serão registradas no arquivo `logs/log.txt`.
 
-### Example Log Entry
+## Estrutura de Arquivo e Funções
 
-The log entries are saved in a log.txt file with a timestamp and a description of the action taken. 
-Example:
+### `main.py`
 
+Controla a lógica principal e o loop de eventos, interagindo com os módulos de telas (`windows.py`) e funções auxiliares (`utils.py`).
 
-- 2023-10-28 12:35:22 - Screen opened: Home - Admin Tool Author Service (ASAT)
-- 2023-10-28 12:36:05 - Screen opened: Settings for APIs
-- 2023-10-28 12:37:01 - Action taken: Back to Home
-- 2023-10-28 12:40:10 - Screen opened: Journal Management
+### `windows.py`
 
+Contém funções para criar telas distintas da aplicação:
+- `main_screen()`: Cria a tela principal.
+- `settings_screen(option)`: Cria a tela de configurações.
+- `profile_screen()`: Cria a tela de edição de perfil.
+- `content_screen(content_type)`: Cria as telas de Journal, Article e Author, com recursos de busca.
+- `confirm_close()`: Confirma o fechamento da aplicação.
 
-### Running the Program
-1. Save this README.md file and the Python script in the same directory.
-2. Run the Python script to start the GUI application.
+### `utils.py`
+
+Inclui funções auxiliares:
+- `log_action(action)`: Registra ações no arquivo `logs/log.txt` com data e hora.
+
+## Exemplo de Log
+
+Abaixo está um exemplo de log de ações que pode ser gerado:
+
+```
+2024-10-28 15:45:12 - Screen opened: Home - Admin Tool Author Service (ASAT)
+2024-10-28 15:46:00 - Screen opened: Settings for APIs
+2024-10-28 15:47:05 - Action taken: Back to Home
+2024-10-28 15:48:45 - Screen opened: Author Management
+2024-10-28 15:49:30 - Search action in Author Management by Last Name with term: Smith
+2024-10-28 15:50:15 - Action taken: Close Application
+```
+
+## Contribuindo
+
+1. Faça um fork do projeto.
+2. Crie uma branch para a sua feature:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça commit das suas mudanças:
+   ```bash
+   git commit -m "Minha nova feature"
+   ```
+4. Faça push para a branch:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um Pull Request.
+
