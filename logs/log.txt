@@ -1,7 +1,0 @@
-2024-10-29 21:12:26.985559 - Screen opened: Home - Admin Tool Author Service (ASAT)
-2024-10-29 21:12:29.252154 - Screen opened: Journal Management
-2024-10-29 21:12:30.942723 - Action taken: Back to Home
-2024-10-29 21:12:31.566028 - Screen opened: Article Management
-2024-10-29 21:12:32.643639 - Action taken: Back to Home
-2024-10-29 21:12:33.886725 - Screen opened: Author Management
-2024-10-29 21:12:35.196829 - Action taken: Back to Home
